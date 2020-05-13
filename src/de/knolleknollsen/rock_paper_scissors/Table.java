@@ -1,18 +1,21 @@
 package de.knolleknollsen.rock_paper_scissors;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class Table {
 
-    protected RockPaperScissors[] table = new RockPaperScissors[2];
+    protected Map<Integer, RockPaperScissors> table = new HashMap<>();
 
 //    protected RockPaperScissors left;
 //    protected RockPaperScissors right;
 
 
-    public synchronized void setPick(int index, RockPaperScissors obj) throws InterruptedException {
+    public synchronized void setPick(int index, RockPaperScissors obj) {
 
     }
-    public synchronized int[] fetchPicks() throws InterruptedException {
+    public synchronized int[] fetchPicks() {
         return null;
     }
 
@@ -20,18 +23,18 @@ public abstract class Table {
 
 
 
-    public RockPaperScissors[] getTable() {
+    public Map<Integer, RockPaperScissors> getTable() {
         return table;
     }
 
 
 
-    public void start(Table table, int time) {
-        Referee referee = new Referee(table);
+    public void start(int time) {
+        Referee referee = new Referee(this);
         referee.setName("referee");
-        Player player0 = new Player(table, 0);
+        Player player0 = new Player(this, 0);
         player0.setName("player 0");
-        Player player1 = new Player(table, 1);
+        Player player1 = new Player(this, 1);
         player1.setName("player 1");
         referee.start();
         player0.start();

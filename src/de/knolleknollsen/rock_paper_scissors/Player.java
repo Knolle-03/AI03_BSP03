@@ -16,7 +16,11 @@ public class Player extends Thread {
 
     @Override
     public void run() {
-        while (!isInterrupted()) table.setPick(side, pick());
+        while (!isInterrupted()){
+            table.setPick(side, pick());
+            System.out.println(this.getName() + " set pick!");
+
+        }
 
     }
 

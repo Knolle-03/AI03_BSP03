@@ -6,10 +6,9 @@ public class Main {
         for (int i = 0; i < 1; i++) {
             System.out.println("------------ new Game ----------");
             Table lockTable = new LockTable();
-            lockTable.start( 1000);
-//            Table syncTable = new MonitorTable();
-//            syncTable.start(1000);
+            lockTable.start( 10000);
+            Table syncTable = new MonitorTable();
+            syncTable.start(10000);
         }
     }
-
 }

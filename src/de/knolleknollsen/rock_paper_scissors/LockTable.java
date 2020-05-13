@@ -13,57 +13,73 @@ public class LockTable extends Table{
 
     @Override
     public void setPick(int index, RockPaperScissors obj) {
-
+        // try to acquire lock
         tableLock.lock();
         try {
+            // wait fot other player and/or referee
             while (table.get(index) != null) {
                 try {
-                    System.out.println(Thread.currentThread().getName() + " awaits signal.");
+                    // wait for other player and/or referee
                     evaluated.await();
-                    System.out.println(Thread.currentThread().getName() + " got a signal.");
+                // if player gets interrupted while waiting
                 } catch (InterruptedException ex) {
-                    System.out.println("Player was interrupted setting the pick");
+                    // reset interrupt flag since it was cleared while waiting
                     Thread.currentThread().interrupt();
+                    // return from method
                     return;
                 }
             }
+
+            // set own pick
             table.put(index, obj);
-            System.out.println(Thread.currentThread().getName() + " sent a signal.");
+
+            // give signal to referee that we set a pick
             played.signal();
         } finally{
+            // release lock
             tableLock.unlock();
         }
     }
 
     @Override
     public int[] fetchPicks() {
-        int[] picks = new int[2];
+
+        // int array for the picks
+        int[] picks;
+
+        // try to acquire lock
         tableLock.lock();
         try {
+
+            // until both players have played
             while (table.get(0) == null || table.get(1) == null) {
                 try {
-                    System.out.println(Thread.currentThread().getName() + " awaits signal.");
+                    // wait for one or both players
                     played.await();
-                    System.out.println(Thread.currentThread().getName() + " got a signal.");
                 } catch (InterruptedException ex) {
-                    System.out.println("Referee was interrupted fetching the picks.");
+                    // reset interrupt flag since it was cleared while waiting
                     Thread.currentThread().interrupt();
+
+                    // return from method
                     return null;
                 }
             }
 
-            picks[0] = table.get(0).ordinal();
-            picks[1] = table.get(1).ordinal();
-            System.out.println(table.get(0) + "    " + table.get(1));
+            // get picks from players
+            picks = new int[] {table.get(0).ordinal(), table.get(1).ordinal()};
+
+            // reset table
             table.put(0, null);
             table.put(1, null);
-            System.out.println(Thread.currentThread().getName() + " sent a signal.");
+
+            // give signal to both players
             evaluated.signalAll();
         }finally {
+            // release lock
             tableLock.unlock();
         }
 
-
+        // return picks
         return picks;
     }
 }

@@ -4,8 +4,11 @@ import java.util.Random;
 
 public class Player extends Thread {
 
+    // table to play on
     private final Table table;
+    // left or right side of the table
     int side;
+    // random number generator for picks
     Random rng = new Random();
 
     public Player(Table table, int side) {
@@ -16,17 +19,14 @@ public class Player extends Thread {
 
     @Override
     public void run() {
-        while (!isInterrupted()){
-            table.setPick(side, pick());
-            System.out.println(this.getName() + " set pick!");
-
-        }
-
+        // while not interrupted set more picks
+        while (!isInterrupted()) table.setPick(side, pick());
     }
 
-
-
+    // choose a pick
     private RockPaperScissors pick() {
+
+        // by "rolling the dice"
         return RockPaperScissors.values()[rng.nextInt(3)];
     }
 

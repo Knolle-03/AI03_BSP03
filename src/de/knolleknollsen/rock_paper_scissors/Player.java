@@ -16,14 +16,8 @@ public class Player extends Thread {
 
     @Override
     public void run() {
-        while (!isInterrupted()) {
-            RockPaperScissors pick = pick();
-            if (table.setPick(side, pick)) {
-                interrupt();
-            }
-        }
+        while (!isInterrupted()) table.setPick(side, pick());
 
-        System.out.println(this.getName() + " stopped playing");
     }
 
 

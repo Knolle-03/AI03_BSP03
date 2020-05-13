@@ -39,6 +39,7 @@ public class Student extends Thread {
                 checkoutLock.lock();
                 // pay
                 pay(payment);
+                currentCheckout.decreaseQueueSize();
             } finally {
                 // unlock every time
                 checkoutLock.unlock();
@@ -48,7 +49,6 @@ public class Student extends Thread {
             totalPayed += payment;
             increaseTimesPayedAt(currentCheckout);
             increaseAmountPayedAt(currentCheckout, payment);
-            currentCheckout.decreaseQueueSize();
 
 
             // eat and study
@@ -81,20 +81,26 @@ public class Student extends Thread {
 
     private void pickCheckout() {
         int index = 0;
+        int length = Integer.MAX_VALUE;
+        pickCheckoutLock.lock();
         try {
-            int length = checkouts[index].getQueueSize();
-            pickCheckoutLock.lock();
-            for (int i = 1; i < checkouts.length; i++) {
-                if (checkouts[i].getQueueSize() < length) index = i;
+            for (int i = 0; i < checkouts.length; i++) {
+                if (checkouts[i].getQueueSize() < length){
+                    index = i;
+                    length = checkouts[i].getQueueSize();
+                }
             }
-
-        } finally {
             currentCheckout = checkouts[index];
             currentCheckout.increaseQueueSize();
+        } finally {
+
             pickCheckoutLock.unlock();
         }
 
-        checkoutLock = checkouts[index].getLock();
+        checkoutLock = currentCheckout.getLock();
+        System.out.println(this.getName() + " queues at " + currentCheckout.getName());
+
+
 
     }
 

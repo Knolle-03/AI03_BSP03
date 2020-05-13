@@ -1,47 +1,24 @@
 package de.knolleknollsen.rock_paper_scissors;
 
 
-public class Table {
+public abstract class Table {
 
-    private final RockPaperScissors[] table = new RockPaperScissors[2];
+    protected RockPaperScissors[] table = new RockPaperScissors[2];
+
+//    protected RockPaperScissors left;
+//    protected RockPaperScissors right;
 
 
+    public synchronized void setPick(int index, RockPaperScissors obj) throws InterruptedException {
 
-    public synchronized boolean setPick(int index, RockPaperScissors obj) {
-        {
-            while (table[index] != null) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    System.out.println("Player was interrupted setting the pick");
-                    return true;
-                }
-            }
-            table[index] = obj;
-        }
-        notifyAll();
-        return false;
+    }
+    public synchronized int[] fetchPicks() throws InterruptedException {
+        return null;
     }
 
-    public synchronized int[] fetchPicks() {
-        int[] picks;
-         {
-            while (table[0] == null || table[1] == null) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    System.out.println("Referee was interrupted fetching the picks.");
-                    return null;
-                }
-            }
-            picks = new int[]{table[0].ordinal(), table[1].ordinal()};
-            table[0] = null;
-            table[1] = null;
-        }
-        notifyAll();
 
-        return picks;
-    }
+
+
 
     public RockPaperScissors[] getTable() {
         return table;
@@ -49,8 +26,7 @@ public class Table {
 
 
 
-    public static void main(String[] args) {
-        Table table = new Table();
+    public void start(Table table, int time) {
         Referee referee = new Referee(table);
         referee.setName("referee");
         Player player0 = new Player(table, 0);
@@ -62,7 +38,7 @@ public class Table {
         player1.start();
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(time);
         } catch (InterruptedException ignored) {
 
         }
@@ -70,17 +46,9 @@ public class Table {
         player0.interrupt();
         player1.interrupt();
         referee.interrupt();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException ignored) {
-
-        }
-
 //        System.out.println(player0.getName() + ": " + player0.isAlive());
 //        System.out.println(player1.getName() + ": " + player1.isAlive());
 //        System.out.println(referee.getName() + ": " + referee.isAlive());
-
-
         try {
             player0.join();
             player1.join();
@@ -88,9 +56,5 @@ public class Table {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
 }

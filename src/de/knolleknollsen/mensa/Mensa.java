@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Mensa {
-    private static final int checkoutCount = 2;
+    private static final int checkoutCount = 3;
     private static final int studentCount = 10;
     private static final Checkout[] checkouts = new Checkout[checkoutCount];
     private static final Student[] students = new Student[studentCount];
@@ -46,7 +46,7 @@ public class Mensa {
         }
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException ignored) {
 
         }
@@ -62,7 +62,8 @@ public class Mensa {
 
 
         for (int i = 0; i < checkoutCount; i++) {
-            if (allStudentsAt[i] != allStudentsRegisteredAt[i] || totalPaymentsAt[i] != totalPaymentsRegisteredAt[i]) throw new IllegalStateException("oh oh...");
+            if (allStudentsAt[i] != allStudentsRegisteredAt[i]) throw new IllegalStateException("\nStudents should: " + allStudentsRegisteredAt[i] + "\nwas: " + allStudentsAt[i]);
+            else if (totalPaymentsAt[i] != totalPaymentsRegisteredAt[i]) throw new IllegalStateException("\nPayments should: " + totalPaymentsRegisteredAt[i] + "\nwas: " + totalPaymentsAt[i]);
         }
 
 
@@ -84,7 +85,6 @@ public class Mensa {
     public synchronized static void updateAllStudentsAt(int at, int times) {
         allStudentsAt[at] += times;
     }
-
     public synchronized static void updateTotalPaymentAt(int at, int payment) {
         totalPaymentsAt[at] += payment;
     }
@@ -93,7 +93,6 @@ public class Mensa {
     public synchronized static void updateAllStudentsRegisteredAt(int at, int all) {
         allStudentsRegisteredAt[at] = all;
     }
-
     public synchronized static void updateTotalPaymentRegisteredAt(int at, int totalPayed) {
         totalPaymentsRegisteredAt[at] = totalPayed;
     }

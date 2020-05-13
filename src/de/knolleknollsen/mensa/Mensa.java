@@ -66,11 +66,11 @@ public class Mensa {
         }
 
 
-        System.out.println("\n\n\n\n\nStudentCount from Students: " + Arrays.toString(allStudentsAt));
+        System.out.println("\n\n\n\n\nStudentCount from Students:  " + Arrays.toString(allStudentsAt));
         System.out.println("StudentCount from Checkouts: " + Arrays.toString(allStudentsRegisteredAt) + "\n\n\n");
 
 
-        System.out.println("Total payments from Students: " + Arrays.toString(totalPaymentsAt));
+        System.out.println("Total payments from Students:  " + Arrays.toString(totalPaymentsAt));
         System.out.println("Total payments from Checkouts: " + Arrays.toString(totalPaymentsRegisteredAt));
 
 

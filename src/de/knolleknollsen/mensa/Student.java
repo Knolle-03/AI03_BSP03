@@ -81,18 +81,19 @@ public class Student extends Thread {
 
     private void pickCheckout() {
         int index = 0;
+        int length = checkouts[index].getQueueSize();
         try {
-            int length = checkouts[index].getQueueSize();
             pickCheckoutLock.lock();
             for (int i = 1; i < checkouts.length; i++) {
                 if (checkouts[i].getQueueSize() < length) index = i;
             }
 
         } finally {
-            currentCheckout = checkouts[index];
-            currentCheckout.increaseQueueSize();
             pickCheckoutLock.unlock();
         }
+        currentCheckout = checkouts[index];
+        System.out.println(this.getName() + " queues at " + currentCheckout.getName());
+        currentCheckout.increaseQueueSize();
 
         checkoutLock = checkouts[index].getLock();
 

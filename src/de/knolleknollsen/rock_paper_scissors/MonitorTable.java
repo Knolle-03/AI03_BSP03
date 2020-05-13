@@ -32,7 +32,7 @@ public class MonitorTable extends Table {
 
     @Override
     public synchronized int[] fetchPicks() {
-
+        // int array for the picks
         int[] picks;
 
         // until both players set their picks

@@ -4,11 +4,12 @@ public class Main {
 
     public static void main(String[] args) {
         for (int i = 0; i < 1; i++) {
-            System.out.println("------------ new Game ----------");
+            System.out.println("----------- Lock Table -----------");
             Table lockTable = new LockTable();
-            lockTable.start( 10000);
+            lockTable.start( 100);
+            System.out.println("---------- Monitor Table ---------");
             Table syncTable = new MonitorTable();
-            syncTable.start(10000);
+            syncTable.start(100);
         }
     }
 }

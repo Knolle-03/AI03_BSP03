@@ -57,10 +57,10 @@ public class Student extends Thread {
         }
 
         // before exiting run() update mensa
-        for (int i = 0; i < checkouts.length; i++) {
-            Mensa.updateAllStudentsAt(i, timesPayedAt[i]);
-            Mensa.updateTotalPaymentAt(i, payedAt[i]);
-        }
+//        for (int i = 0; i < checkouts.length; i++) {
+//            Mensa.updateAllStudentsAt(i, timesPayedAt[i]);
+//            Mensa.updateTotalPaymentAt(i, payedAt[i]);
+//        }
     }
 
 
@@ -68,14 +68,11 @@ public class Student extends Thread {
         try {
             System.out.println(this.getName() + " is paying at " + currentCheckout.getName() + ".");
             currentCheckout.addToTotal(payment);
-            Thread.sleep(rng.nextInt(100));
+            Thread.sleep(rng.nextInt(200));
         } catch (InterruptedException ex) {
             interrupt();
             System.out.println(this.getName() + " was interrupted while paying.");
         }
-
-
-
     }
 
 

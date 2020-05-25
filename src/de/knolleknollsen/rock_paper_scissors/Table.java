@@ -46,9 +46,7 @@ public abstract class Table {
         // let game run from the given time period
         try {
             Thread.sleep(time);
-        } catch (InterruptedException ignored) {
-
-        }
+        } catch (InterruptedException ignored) {}
 
         // interrupt all other threads
         player0.interrupt();
@@ -56,17 +54,11 @@ public abstract class Table {
         referee.interrupt();
 
 
-//        System.out.println(player0.getName() + ": " + player0.isAlive());
-//        System.out.println(player1.getName() + ": " + player1.isAlive());
-//        System.out.println(referee.getName() + ": " + referee.isAlive());
-
         // wait for other threads to die
         try {
             player0.join();
             player1.join();
             referee.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        } catch (InterruptedException ignored) {}
     }
 }

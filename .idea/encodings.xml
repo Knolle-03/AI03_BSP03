@@ -2,6 +2,10 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/de/knolleknollsen/vorlesung/Java_Beispiele_VL_06/ThreadTest6fehler7.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/de/knolleknollsen/vorlesung/Java_Beispiele_VL_06/ThreadTest9.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/de/knolleknollsen/vorlesung/Simulation_Shop/Customer.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/de/knolleknollsen/vorlesung/Simulation_Shop/Shop.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/de/knolleknollsen/vorlesung/Simulation_Shop/ShopServer.java" charset="windows-1252" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

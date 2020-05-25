@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class Referee extends Thread {
     //                  Player 1
-    //           | ROCK |SCISSORS|PAPER
-    // Player 0  -----------------------
-    // Rock     |   x   |   +   |  -   |
-    // ---------------------------------
-    // SCISSORS|    -  |    x  |   +  |
-    // ---------------------------------
-    // PAPER  |   +   |   -   |  x   |
+    //          |  ROCK |SCISSORS|PAPER|
+    // Player 0 |-------|--------|-----|
+    // Rock     |   x   |   +    |  -  |
+    // ---------|-------|--------|-----|
+    // SCISSORS |   -   |   x    |  +  |
+    // ---------|-------|--------|-----|
+    // PAPER    |   +   |   -    |  x  |
 
 
     // result matrix for the picks

@@ -1,7 +1,7 @@
 package de.knolleknollsen.rock_paper_scissors;
 
 
-// subclass of Table implements abstract methods from superclass with monitors
+// subclass of Table that implements abstract methods from superclass with monitors
 public class MonitorTable extends Table {
 
 

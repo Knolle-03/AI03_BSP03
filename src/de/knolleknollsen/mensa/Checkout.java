@@ -23,8 +23,8 @@ public class Checkout extends Thread {
         while (!isInterrupted() || queueSize > 0) {
 
         }
-        Mensa.updateTotalPaymentRegisteredAt(index, total);
-        Mensa.updateAllStudentsRegisteredAt(index, customers);
+//        Mensa.updateTotalPaymentRegisteredAt(index, total);
+//        Mensa.updateAllStudentsRegisteredAt(index, customers);
     }
 
 //    private synchronized void retrievePayment() {
@@ -43,6 +43,10 @@ public class Checkout extends Thread {
     public void addToTotal(int payment) {
         this.total += payment;
         customers++;
+    }
+
+    public int getCustomers() {
+        return customers;
     }
 
     public ReentrantLock getLock() {

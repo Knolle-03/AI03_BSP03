@@ -51,13 +51,13 @@ public abstract class Table {
         // interrupt all other threads
         player0.interrupt();
         player1.interrupt();
-        referee.interrupt();
 
 
         // wait for other threads to die
         try {
             player0.join();
             player1.join();
+            referee.interrupt();
             referee.join();
         } catch (InterruptedException ignored) {}
     }

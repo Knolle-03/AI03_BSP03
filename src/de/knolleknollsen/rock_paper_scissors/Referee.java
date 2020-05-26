@@ -1,6 +1,7 @@
 package de.knolleknollsen.rock_paper_scissors;
 
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class Referee extends Thread {
@@ -46,7 +47,6 @@ public class Referee extends Thread {
             if (picks != null) calcResults(picks);
         }
 
-
         // print results
         System.out.println("Total games played: " + data[0]);
         System.out.println("Total games won by player 0: " + data[1]);
@@ -57,13 +57,26 @@ public class Referee extends Thread {
 
 
     private void calcResults(int[] picks) {
+        RockPaperScissors pick0 = RockPaperScissors.values()[picks[0]];
+        RockPaperScissors pick1 = RockPaperScissors.values()[picks[1]];
+
+
         // increment games played
         data[0]++;
         // result for player 0
         int outCome = resultMatrix[picks[0]][picks[1]];
         // player 0 won
-        if (outCome == 1) data[2]++;
+        if (outCome == 1) {
+            data[2]++;
+            System.out.println("Player 0 won by playing " + pick0.toString() + " against " + pick1.toString());
+        }
         // player 1 won
-        else if (outCome == -1) data[1]++;
+        else if (outCome == -1) {
+            data[1]++;
+            System.out.println("Player 1 won by playing " + pick1.toString() + " against " + pick0.toString());
+        }
+       else {
+            System.out.println("Both players picked " + pick0 + ".");
+        }
     }
 }

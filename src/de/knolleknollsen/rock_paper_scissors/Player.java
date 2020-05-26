@@ -25,9 +25,9 @@ public class Player extends Thread {
 
     // choose a pick
     private RockPaperScissors pick() {
-
+        int pick = rng.nextInt(3);
         // by "rolling the dice"
-        return RockPaperScissors.values()[rng.nextInt(3)];
+        return RockPaperScissors.values()[pick];
     }
 
 }

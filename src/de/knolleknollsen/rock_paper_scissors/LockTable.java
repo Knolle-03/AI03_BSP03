@@ -13,6 +13,7 @@ public class LockTable extends Table{
 
     @Override
     public void setPick(int index, RockPaperScissors obj) {
+
         // try to acquire lock
         tableLock.lock();
         try {
@@ -35,10 +36,14 @@ public class LockTable extends Table{
 
             // give signal to referee that we set a pick
             played.signal();
+
         } finally{
             // release lock
             tableLock.unlock();
+
         }
+
+
     }
 
     @Override

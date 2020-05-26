@@ -11,16 +11,18 @@ public class Checkout extends Thread {
     private int queueSize;
 
 
-    public Checkout(int index, ReentrantLock lock) {
+    public Checkout(int index) {
+
+        lock = new ReentrantLock(true);
         this.index = index;
-        this.lock = lock;
     }
 
 
     @Override
     public void run() {
         System.out.println(this.getName() + " is ready.");
-        while (!isInterrupted() || queueSize > 0) {
+        while (true) {
+            if (isInterrupted() && queueSize <= 0) break;
 
         }
 //        Mensa.updateTotalPaymentRegisteredAt(index, total);

@@ -1,13 +1,11 @@
 package de.knolleknollsen.mensa;
 
-import java.util.Arrays;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Mensa {
     private static final int checkoutCount = 3;
     private static final int studentCount = 10;
     private static final Checkout[] checkouts = new Checkout[checkoutCount];
-//    private static final Student[] students = new Student[studentCount];
     private static final Thread[] allThreads = new Thread[checkoutCount + studentCount];
 
 
@@ -30,8 +28,7 @@ public class Mensa {
 
         // instantiate threads
         for (int i = 0; i < checkoutCount ; i++) {
-            ReentrantLock reentrantLock = new ReentrantLock(true);
-            Checkout checkout = new Checkout(i , reentrantLock);
+            Checkout checkout = new Checkout(i);
             checkout.setName("checkout " + (i + 1));
             checkouts[i] = checkout;
             allThreads[i] = checkout;
